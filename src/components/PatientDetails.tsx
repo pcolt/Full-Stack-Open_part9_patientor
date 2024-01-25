@@ -24,15 +24,30 @@ const PatientDetails = () => {
     void fetchPatient();
   }, [id]);
 
+  if (!patient) {
+    return <div>Loading...</div>;
+  } 
+
   return (
-    patient ?
     <div>
       <h2>{patient.name}</h2>
       <div>gender {patient.gender}</div>
       <div>ssn: {patient.ssn}</div>
       <div>occupation: {patient.occupation}</div>
+      <h3>entries</h3>
+      {patient.entries ? 
+      <div>
+        {patient.entries.map(entry => 
+          <div key={entry.id}>
+            <div>{entry.date} - <i>{entry.description}</i></div>
+            <ul>
+              {entry.diagnosisCodes?.map(code => <li key={code}>{code}</li>)}
+            </ul>
+          </div>
+        )}
+      </div>
+      : <div>no entries found</div>}
     </div>
-    : <div>Loading...</div>
   );
 };
 
