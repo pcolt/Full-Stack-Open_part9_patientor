@@ -4,12 +4,12 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 import { apiBaseUrl } from "../constants";
-import { Patient } from "../types";
+import { Patient, Diagnose } from "../types";
 
 import patientService from "../services/patients";
 
 
-const PatientDetails = () => {
+const PatientDetails = ({diagnosis}: {diagnosis: Diagnose[]}) => {
   const [patient, setPatient] = useState<Patient | undefined>(undefined);
   const { id } = useParams<{ id: string }>();
 
@@ -41,7 +41,9 @@ const PatientDetails = () => {
           <div key={entry.id}>
             <div>{entry.date} - <i>{entry.description}</i></div>
             <ul>
-              {entry.diagnosisCodes?.map(code => <li key={code}>{code}</li>)}
+              {entry.diagnosisCodes?.map(code => 
+                <li key={code}>{code} - {diagnosis.find(d => d.code === code)?.name}</li>
+              )}
             </ul>
           </div>
         )}
