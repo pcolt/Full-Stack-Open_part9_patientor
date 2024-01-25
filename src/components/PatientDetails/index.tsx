@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-import { apiBaseUrl } from "../constants";
-import { Patient, Diagnose } from "../types";
+import { apiBaseUrl } from "../../constants";
+import { Patient, Diagnose } from "../../types";
 
-import patientService from "../services/patients";
+import patientService from "../../services/patients";
+import EntryComponent from "./EntryComponent";
 
 
 const PatientDetails = ({diagnosis}: {diagnosis: Diagnose[]}) => {
@@ -35,18 +36,13 @@ const PatientDetails = ({diagnosis}: {diagnosis: Diagnose[]}) => {
       <div>ssn: {patient.ssn}</div>
       <div>occupation: {patient.occupation}</div>
       <h3>entries</h3>
-      {patient.entries ? 
+      {(patient.entries && patient.entries.length > 0) ? 
       <div>
-        {patient.entries.map(entry => 
-          <div key={entry.id}>
-            <div>{entry.date} - <i>{entry.description}</i></div>
-            <ul>
-              {entry.diagnosisCodes?.map(code => 
-                <li key={code}>{code} - {diagnosis.find(d => d.code === code)?.name}</li>
-              )}
-            </ul>
-          </div>
-        )}
+        <div>
+          {patient.entries.map(entry => 
+            <EntryComponent key={entry.id} diagnosis={diagnosis} entry={entry}></EntryComponent>
+          )}
+        </div>
       </div>
       : <div>no entries found</div>}
     </div>
