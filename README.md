@@ -6,11 +6,6 @@
 
 # Exercises
 
-To match correct backend port base url has been set to 
-```javascript
-apiBaseUrl = 'http://localhost:3003/api';
-``` 
-
 ## 9.9, 9.12, 9.21, 9.23, 9.24, 9.25
 
 Start the application in development mode with `npm run dev`  
