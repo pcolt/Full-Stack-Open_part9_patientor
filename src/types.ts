@@ -10,6 +10,16 @@ export enum Gender {
   Other = "other"
 }
 
+export interface Patient {
+  id: string;
+  name: string;
+  occupation: string;
+  gender: Gender;
+  ssn?: string;
+  dateOfBirth?: string;
+  entries: Entry[];
+}
+
 export interface Diagnose {
   code: string;
   name: string;
@@ -40,16 +50,6 @@ export enum HealthCheckRating {
 
 export const entryType = ["HealthCheck", "Hospital", "OccupationalHealthcare"];
 export type EntryType = typeof entryType[number];
-
-export interface Patient {
-  id: string;
-  name: string;
-  occupation: string;
-  gender: Gender;
-  ssn?: string;
-  dateOfBirth?: string;
-  entries: Entry[];
-}
 
 interface HealthCheckEntry extends BaseEntry {
   type: "HealthCheck";
