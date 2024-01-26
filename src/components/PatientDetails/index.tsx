@@ -31,11 +31,11 @@ const PatientDetails = ({diagnosis}: {diagnosis: Diagnose[]}) => {
 
   return (
     <div>
-      <h2>{patient.name}</h2>
+      <h3>{patient.name}</h3>
       <div>gender {patient.gender}</div>
       <div>ssn: {patient.ssn}</div>
       <div>occupation: {patient.occupation}</div>
-      <h3>entries</h3>
+      <h2>Entries:</h2>
       {(patient.entries && patient.entries.length > 0) ? 
       <div>
         <div>
